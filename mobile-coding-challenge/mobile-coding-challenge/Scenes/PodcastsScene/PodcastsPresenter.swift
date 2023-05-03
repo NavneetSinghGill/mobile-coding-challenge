@@ -14,18 +14,16 @@ import UIKit
 
 protocol PodcastsPresentationLogic
 {
-  func presentSomething(response: Podcasts.Something.Response)
+  func presentBestPodcasts(response: Podcasts.GetBestPodcasts.Response)
 }
 
 class PodcastsPresenter: PodcastsPresentationLogic
 {
   weak var viewController: PodcastsDisplayLogic?
   
-  // MARK: Do something
-  
-  func presentSomething(response: Podcasts.Something.Response)
+  func presentBestPodcasts(response: Podcasts.GetBestPodcasts.Response)
   {
-    let viewModel = Podcasts.Something.ViewModel()
-    viewController?.displaySomething(viewModel: viewModel)
+//    let viewModel = Podcasts.GetBestPodcasts.ViewModel()
+//    viewController?.displaySomething(viewModel: viewModel)
   }
 }

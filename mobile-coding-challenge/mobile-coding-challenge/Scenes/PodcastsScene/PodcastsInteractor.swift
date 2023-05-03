@@ -14,7 +14,7 @@ import UIKit
 
 protocol PodcastsBusinessLogic
 {
-  func doSomething(request: Podcasts.Something.Request)
+  func getBestPodcasts(request: Podcasts.GetBestPodcasts.Request)
 }
 
 protocol PodcastsDataStore
@@ -26,16 +26,15 @@ class PodcastsInteractor: PodcastsBusinessLogic, PodcastsDataStore
 {
   var presenter: PodcastsPresentationLogic?
   var worker: PodcastsWorker?
-  //var name: String = ""
   
-  // MARK: Do something
+  // MARK: APIs
   
-  func doSomething(request: Podcasts.Something.Request)
+  func getBestPodcasts(request: Podcasts.GetBestPodcasts.Request)
   {
     worker = PodcastsWorker()
-    worker?.doSomeWork()
+    worker?.getBestPodcasts()
     
-    let response = Podcasts.Something.Response()
-    presenter?.presentSomething(response: response)
+//    let response = Podcasts.GetBestPodcasts.Response()
+//    presenter?.presentBestPodcasts(response: response)
   }
 }

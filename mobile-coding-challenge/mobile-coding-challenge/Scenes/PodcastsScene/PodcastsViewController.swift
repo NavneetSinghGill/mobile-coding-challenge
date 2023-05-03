@@ -12,9 +12,9 @@
 
 import UIKit
 
-protocol PodcastsDisplayLogic: class
+protocol PodcastsDisplayLogic: AnyObject
 {
-  func displaySomething(viewModel: Podcasts.Something.ViewModel)
+    func displayBestPodcasts(viewModel: Podcasts.GetBestPodcasts.ViewModel)
 }
 
 class PodcastsViewController: UIViewController, PodcastsDisplayLogic
@@ -75,19 +75,17 @@ class PodcastsViewController: UIViewController, PodcastsDisplayLogic
     showTheBestPodcasts()
   }
   
-  // MARK: Do something
-  
-  //@IBOutlet weak var nameTextField: UITextField!
+  // MARK: Interactions
   
   func showTheBestPodcasts()
   {
     let request = Podcasts.GetBestPodcasts.Request()
-    interactor?.doSomething(request: request)
+    interactor?.getBestPodcasts(request: request)
   }
   
-  func displaySomething(viewModel: Podcasts.Something.ViewModel)
+  func displayBestPodcasts(viewModel: Podcasts.GetBestPodcasts.ViewModel)
   {
-    //nameTextField.text = viewModel.name
+    
   }
 }
 

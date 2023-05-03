@@ -12,9 +12,10 @@
 
 import UIKit
 
-class PodcastsWorker
-{
-  func doSomeWork()
-  {
-  }
+class PodcastsWorker {
+    
+    func getBestPodcasts() {
+        
+    }
+    
 }

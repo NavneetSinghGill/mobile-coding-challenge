@@ -18,13 +18,13 @@ enum Podcasts
   
     enum GetBestPodcasts {
       
-      struct Request: Codable {
-          let genreID: String
-          let page: String
-          let region: String
-      }
+        struct Request: Codable {
+            var genreID: String = "93"
+            var page: String = "2"
+            var region: String = "us"
+        }
       
-        struct Response: Codable {
+        struct Response {
           let id: String
           let name: String
           let total: String
@@ -37,7 +37,7 @@ enum Podcasts
       }
       
       struct ViewModel {
-          
+          let podcasts: [Podcast]
       }
       
     }
