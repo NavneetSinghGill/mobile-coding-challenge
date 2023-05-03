@@ -19,6 +19,9 @@ protocol PodcastsDisplayLogic: class
 
 class PodcastsViewController: UIViewController, PodcastsDisplayLogic
 {
+    
+    @IBOutlet weak var tableView: UITableView!
+    
   var interactor: PodcastsBusinessLogic?
   var router: (NSObjectProtocol & PodcastsRoutingLogic & PodcastsDataPassing)?
 
@@ -86,4 +89,20 @@ class PodcastsViewController: UIViewController, PodcastsDisplayLogic
   {
     //nameTextField.text = viewModel.name
   }
+}
+
+extension PodcastsViewController: UITableViewDelegate {
+    
+}
+
+extension PodcastsViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
+    }
+    
 }

@@ -14,18 +14,31 @@ import UIKit
 
 enum Podcasts
 {
-  // MARK: Use cases
+    // MARK: Use cases
   
-  enum Something
-  {
-    struct Request
-    {
+    enum GetBestPodcasts {
+      
+      struct Request: Codable {
+          let genreID: String
+          let page: String
+          let region: String
+      }
+      
+        struct Response: Codable {
+          let id: String
+          let name: String
+          let total: String
+          let hasNext: Bool
+          let podcasts: [Podcast]
+          let parentID: Int
+          let pageNumber: Int
+          let nextPageNumber: Int
+          let previousPageNumber: Int
+      }
+      
+      struct ViewModel {
+          
+      }
+      
     }
-    struct Response
-    {
-    }
-    struct ViewModel
-    {
-    }
-  }
 }

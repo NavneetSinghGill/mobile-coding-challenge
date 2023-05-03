@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		E9A183FC2A02CBBA00B7491D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A183FB2A02CBBA00B7491D /* AppDelegate.swift */; };
 		E9A183FE2A02CBBA00B7491D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A183FD2A02CBBA00B7491D /* SceneDelegate.swift */; };
-		E9A184002A02CBBA00B7491D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A183FF2A02CBBA00B7491D /* ViewController.swift */; };
 		E9A184032A02CBBA00B7491D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9A184012A02CBBA00B7491D /* Main.storyboard */; };
 		E9A184052A02CBBB00B7491D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E9A184042A02CBBB00B7491D /* Assets.xcassets */; };
 		E9A184082A02CBBB00B7491D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9A184062A02CBBB00B7491D /* LaunchScreen.storyboard */; };
@@ -24,6 +23,7 @@
 		E9A184362A02EF2200B7491D /* PodcastsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A184302A02EF2200B7491D /* PodcastsInteractor.swift */; };
 		E9A1843A2A02F16800B7491D /* PodcastsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A184382A02F16800B7491D /* PodcastsTableViewCell.swift */; };
 		E9A1843B2A02F16800B7491D /* PodcastsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9A184392A02F16800B7491D /* PodcastsTableViewCell.xib */; };
+		E9A184412A02FCBC00B7491D /* Podcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A184402A02FCBC00B7491D /* Podcast.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,7 +47,6 @@
 		E9A183F82A02CBBA00B7491D /* mobile-coding-challenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mobile-coding-challenge.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9A183FB2A02CBBA00B7491D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E9A183FD2A02CBBA00B7491D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		E9A183FF2A02CBBA00B7491D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E9A184022A02CBBA00B7491D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E9A184042A02CBBB00B7491D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E9A184072A02CBBB00B7491D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -65,6 +64,7 @@
 		E9A184302A02EF2200B7491D /* PodcastsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastsInteractor.swift; sourceTree = "<group>"; };
 		E9A184382A02F16800B7491D /* PodcastsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastsTableViewCell.swift; sourceTree = "<group>"; };
 		E9A184392A02F16800B7491D /* PodcastsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PodcastsTableViewCell.xib; sourceTree = "<group>"; };
+		E9A184402A02FCBC00B7491D /* Podcast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Podcast.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,10 +117,10 @@
 			children = (
 				E9A183FB2A02CBBA00B7491D /* AppDelegate.swift */,
 				E9A183FD2A02CBBA00B7491D /* SceneDelegate.swift */,
-				E9A183FF2A02CBBA00B7491D /* ViewController.swift */,
 				E9A184012A02CBBA00B7491D /* Main.storyboard */,
 				E9A184042A02CBBB00B7491D /* Assets.xcassets */,
 				E9A184062A02CBBB00B7491D /* LaunchScreen.storyboard */,
+				E9A184432A02FCC700B7491D /* Models */,
 				E9A1843D2A02F17A00B7491D /* TableviewCells */,
 				E9A184372A02EF2B00B7491D /* PodcastsScene */,
 				E9A184092A02CBBB00B7491D /* Info.plist */,
@@ -165,6 +165,14 @@
 				E9A184392A02F16800B7491D /* PodcastsTableViewCell.xib */,
 			);
 			path = TableviewCells;
+			sourceTree = "<group>";
+		};
+		E9A184432A02FCC700B7491D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E9A184402A02FCBC00B7491D /* Podcast.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -299,13 +307,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E9A184002A02CBBA00B7491D /* ViewController.swift in Sources */,
 				E9A184342A02EF2200B7491D /* PodcastsModels.swift in Sources */,
 				E9A183FC2A02CBBA00B7491D /* AppDelegate.swift in Sources */,
 				E9A183FE2A02CBBA00B7491D /* SceneDelegate.swift in Sources */,
 				E9A1843A2A02F16800B7491D /* PodcastsTableViewCell.swift in Sources */,
 				E9A184312A02EF2200B7491D /* PodcastsPresenter.swift in Sources */,
 				E9A184322A02EF2200B7491D /* PodcastsWorker.swift in Sources */,
+				E9A184412A02FCBC00B7491D /* Podcast.swift in Sources */,
 				E9A184332A02EF2200B7491D /* PodcastsRouter.swift in Sources */,
 				E9A184352A02EF2200B7491D /* PodcastsViewController.swift in Sources */,
 				E9A184362A02EF2200B7491D /* PodcastsInteractor.swift in Sources */,
