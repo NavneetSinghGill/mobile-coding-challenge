@@ -24,6 +24,8 @@
 		E9A1843A2A02F16800B7491D /* PodcastsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A184382A02F16800B7491D /* PodcastsTableViewCell.swift */; };
 		E9A1843B2A02F16800B7491D /* PodcastsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9A184392A02F16800B7491D /* PodcastsTableViewCell.xib */; };
 		E9A184412A02FCBC00B7491D /* Podcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A184402A02FCBC00B7491D /* Podcast.swift */; };
+		E9A184462A0307F300B7491D /* PodcastAPI in Frameworks */ = {isa = PBXBuildFile; productRef = E9A184452A0307F300B7491D /* PodcastAPI */; };
+		E9A184482A0307F300B7491D /* ExampleCommandLineApp in Frameworks */ = {isa = PBXBuildFile; productRef = E9A184472A0307F300B7491D /* ExampleCommandLineApp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +74,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9A184462A0307F300B7491D /* PodcastAPI in Frameworks */,
+				E9A184482A0307F300B7491D /* ExampleCommandLineApp in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,6 +195,10 @@
 			dependencies = (
 			);
 			name = "mobile-coding-challenge";
+			packageProductDependencies = (
+				E9A184452A0307F300B7491D /* PodcastAPI */,
+				E9A184472A0307F300B7491D /* ExampleCommandLineApp */,
+			);
 			productName = "mobile-coding-challenge";
 			productReference = E9A183F82A02CBBA00B7491D /* mobile-coding-challenge.app */;
 			productType = "com.apple.product-type.application";
@@ -263,6 +271,9 @@
 				Base,
 			);
 			mainGroup = E9A183EF2A02CBBA00B7491D;
+			packageReferences = (
+				E9A184442A0307F300B7491D /* XCRemoteSwiftPackageReference "podcast-api-swift" */,
+			);
 			productRefGroup = E9A183F92A02CBBA00B7491D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -658,6 +669,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E9A184442A0307F300B7491D /* XCRemoteSwiftPackageReference "podcast-api-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ListenNotes/podcast-api-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E9A184452A0307F300B7491D /* PodcastAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E9A184442A0307F300B7491D /* XCRemoteSwiftPackageReference "podcast-api-swift" */;
+			productName = PodcastAPI;
+		};
+		E9A184472A0307F300B7491D /* ExampleCommandLineApp */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E9A184442A0307F300B7491D /* XCRemoteSwiftPackageReference "podcast-api-swift" */;
+			productName = ExampleCommandLineApp;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E9A183F02A02CBBA00B7491D /* Project object */;
 }

@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "podcast-api-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ListenNotes/podcast-api-swift.git",
+      "state" : {
+        "revision" : "0e712d4d117ab9fa5d54562e5abbd7da400062b3",
+        "version" : "1.1.7"
+      }
+    }
+  ],
+  "version" : 2
+}
