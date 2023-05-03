@@ -16,6 +16,12 @@
 		E9A184132A02CBBC00B7491D /* mobile_coding_challengeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A184122A02CBBC00B7491D /* mobile_coding_challengeTests.swift */; };
 		E9A1841D2A02CBBC00B7491D /* mobile_coding_challengeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A1841C2A02CBBC00B7491D /* mobile_coding_challengeUITests.swift */; };
 		E9A1841F2A02CBBC00B7491D /* mobile_coding_challengeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A1841E2A02CBBC00B7491D /* mobile_coding_challengeUITestsLaunchTests.swift */; };
+		E9A184312A02EF2200B7491D /* PodcastsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A1842B2A02EF2200B7491D /* PodcastsPresenter.swift */; };
+		E9A184322A02EF2200B7491D /* PodcastsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A1842C2A02EF2200B7491D /* PodcastsWorker.swift */; };
+		E9A184332A02EF2200B7491D /* PodcastsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A1842D2A02EF2200B7491D /* PodcastsRouter.swift */; };
+		E9A184342A02EF2200B7491D /* PodcastsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A1842E2A02EF2200B7491D /* PodcastsModels.swift */; };
+		E9A184352A02EF2200B7491D /* PodcastsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A1842F2A02EF2200B7491D /* PodcastsViewController.swift */; };
+		E9A184362A02EF2200B7491D /* PodcastsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A184302A02EF2200B7491D /* PodcastsInteractor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +55,12 @@
 		E9A184182A02CBBC00B7491D /* mobile-coding-challengeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mobile-coding-challengeUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9A1841C2A02CBBC00B7491D /* mobile_coding_challengeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mobile_coding_challengeUITests.swift; sourceTree = "<group>"; };
 		E9A1841E2A02CBBC00B7491D /* mobile_coding_challengeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mobile_coding_challengeUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		E9A1842B2A02EF2200B7491D /* PodcastsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastsPresenter.swift; sourceTree = "<group>"; };
+		E9A1842C2A02EF2200B7491D /* PodcastsWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastsWorker.swift; sourceTree = "<group>"; };
+		E9A1842D2A02EF2200B7491D /* PodcastsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastsRouter.swift; sourceTree = "<group>"; };
+		E9A1842E2A02EF2200B7491D /* PodcastsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastsModels.swift; sourceTree = "<group>"; };
+		E9A1842F2A02EF2200B7491D /* PodcastsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastsViewController.swift; sourceTree = "<group>"; };
+		E9A184302A02EF2200B7491D /* PodcastsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastsInteractor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +117,7 @@
 				E9A184012A02CBBA00B7491D /* Main.storyboard */,
 				E9A184042A02CBBB00B7491D /* Assets.xcassets */,
 				E9A184062A02CBBB00B7491D /* LaunchScreen.storyboard */,
+				E9A184372A02EF2B00B7491D /* PodcastsScene */,
 				E9A184092A02CBBB00B7491D /* Info.plist */,
 			);
 			path = "mobile-coding-challenge";
@@ -125,6 +138,19 @@
 				E9A1841E2A02CBBC00B7491D /* mobile_coding_challengeUITestsLaunchTests.swift */,
 			);
 			path = "mobile-coding-challengeUITests";
+			sourceTree = "<group>";
+		};
+		E9A184372A02EF2B00B7491D /* PodcastsScene */ = {
+			isa = PBXGroup;
+			children = (
+				E9A1842B2A02EF2200B7491D /* PodcastsPresenter.swift */,
+				E9A1842C2A02EF2200B7491D /* PodcastsWorker.swift */,
+				E9A1842D2A02EF2200B7491D /* PodcastsRouter.swift */,
+				E9A1842E2A02EF2200B7491D /* PodcastsModels.swift */,
+				E9A1842F2A02EF2200B7491D /* PodcastsViewController.swift */,
+				E9A184302A02EF2200B7491D /* PodcastsInteractor.swift */,
+			);
+			path = PodcastsScene;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,8 +285,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				E9A184002A02CBBA00B7491D /* ViewController.swift in Sources */,
+				E9A184342A02EF2200B7491D /* PodcastsModels.swift in Sources */,
 				E9A183FC2A02CBBA00B7491D /* AppDelegate.swift in Sources */,
 				E9A183FE2A02CBBA00B7491D /* SceneDelegate.swift in Sources */,
+				E9A184312A02EF2200B7491D /* PodcastsPresenter.swift in Sources */,
+				E9A184322A02EF2200B7491D /* PodcastsWorker.swift in Sources */,
+				E9A184332A02EF2200B7491D /* PodcastsRouter.swift in Sources */,
+				E9A184352A02EF2200B7491D /* PodcastsViewController.swift in Sources */,
+				E9A184362A02EF2200B7491D /* PodcastsInteractor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
