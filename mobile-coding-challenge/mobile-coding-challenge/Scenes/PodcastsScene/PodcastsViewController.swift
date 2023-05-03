@@ -72,16 +72,16 @@ class PodcastsViewController: UIViewController, PodcastsDisplayLogic
   override func viewDidLoad()
   {
     super.viewDidLoad()
-    doSomething()
+    showTheBestPodcasts()
   }
   
   // MARK: Do something
   
   //@IBOutlet weak var nameTextField: UITextField!
   
-  func doSomething()
+  func showTheBestPodcasts()
   {
-    let request = Podcasts.Something.Request()
+    let request = Podcasts.GetBestPodcasts.Request()
     interactor?.doSomething(request: request)
   }
   

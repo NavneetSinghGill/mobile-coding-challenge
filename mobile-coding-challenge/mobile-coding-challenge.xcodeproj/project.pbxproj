@@ -125,8 +125,7 @@
 				E9A184042A02CBBB00B7491D /* Assets.xcassets */,
 				E9A184062A02CBBB00B7491D /* LaunchScreen.storyboard */,
 				E9A184432A02FCC700B7491D /* Models */,
-				E9A1843D2A02F17A00B7491D /* TableviewCells */,
-				E9A184372A02EF2B00B7491D /* PodcastsScene */,
+				E9A184492A03091600B7491D /* Scenes */,
 				E9A184092A02CBBB00B7491D /* Info.plist */,
 			);
 			path = "mobile-coding-challenge";
@@ -152,6 +151,7 @@
 		E9A184372A02EF2B00B7491D /* PodcastsScene */ = {
 			isa = PBXGroup;
 			children = (
+				E9A1843D2A02F17A00B7491D /* TableviewCells */,
 				E9A1842B2A02EF2200B7491D /* PodcastsPresenter.swift */,
 				E9A1842C2A02EF2200B7491D /* PodcastsWorker.swift */,
 				E9A1842D2A02EF2200B7491D /* PodcastsRouter.swift */,
@@ -177,6 +177,14 @@
 				E9A184402A02FCBC00B7491D /* Podcast.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		E9A184492A03091600B7491D /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				E9A184372A02EF2B00B7491D /* PodcastsScene */,
+			);
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
