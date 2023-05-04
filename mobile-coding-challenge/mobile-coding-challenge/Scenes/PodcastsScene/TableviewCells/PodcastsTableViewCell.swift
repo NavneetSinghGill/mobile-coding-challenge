@@ -16,6 +16,11 @@ struct PodcastsTableViewCellConstants {
     let unFavouritedText = " "
 }
 
+struct PodcastsTableViewCellThemeConstants {
+    static let headingFontSize: CGFloat = 17
+    static let subheadingFontSize: CGFloat = 15
+}
+
 class PodcastsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var thumbnailImageView: UIImageView!
@@ -27,14 +32,30 @@ class PodcastsTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        thumbnailImageView.layer.cornerRadius = PodcastsTableViewCellConstants().cornerRadiusOfThumbnail
+        setUIStyle()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        //TODO: make text italic
     }
+    
+    //MARK: Private methods
+    
+    private func setUIStyle() {
+        thumbnailImageView.layer.cornerRadius = PodcastsTableViewCellConstants().cornerRadiusOfThumbnail
+        
+        titleLabel.font = UIFont.systemFont(ofSize: PodcastsTableViewCellThemeConstants.headingFontSize)
+        titleLabel.textColor = .black
+        
+        publisherNameLabel.font = UIFont.italicSystemFont(ofSize: PodcastsTableViewCellThemeConstants.subheadingFontSize)
+        publisherNameLabel.textColor = .gray
+        
+        favouriteLabel.font = UIFont.systemFont(ofSize: PodcastsTableViewCellThemeConstants.subheadingFontSize)
+        favouriteLabel.textColor = .red
+    }
+    
+    //MARK: Public methods
     
     func load(podcast: Podcast?) {
         //Reset the UI before filling
