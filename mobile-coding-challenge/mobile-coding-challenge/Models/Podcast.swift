@@ -8,9 +8,10 @@
 import Foundation
 
 struct Podcast {
+    let id: String
     let thumbNailUrl: String
     let title: String
     let name: String
-    let isFavourite: Bool
+    var isFavourite: Bool
     let description: String
 }

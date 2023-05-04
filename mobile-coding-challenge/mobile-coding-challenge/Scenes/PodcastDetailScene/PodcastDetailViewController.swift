@@ -16,6 +16,11 @@ protocol PodcastDetailDisplayLogic: AnyObject {
     func displaySomething(viewModel: PodcastDetail.Something.ViewModel)
 }
 
+struct PodcastDetailViewControllerConstants {
+    static let thumbnailImageViewCornerRadius: CGFloat = 20
+    static let favouriteButtonCornerRadius: CGFloat = 10
+}
+
 class PodcastDetailViewController: UIViewController, PodcastDetailDisplayLogic {
     
     @IBOutlet weak var titleLabel: UILabel!
@@ -28,6 +33,8 @@ class PodcastDetailViewController: UIViewController, PodcastDetailDisplayLogic {
     @IBOutlet weak var backButton: UIButton!
     
     var podcast: Podcast?
+    
+    weak var delegate: PodcastsViewControllerDelegate?
     
     var interactor: PodcastDetailBusinessLogic?
     var router: (NSObjectProtocol & PodcastDetailRoutingLogic & PodcastDetailDataPassing)?
@@ -88,20 +95,37 @@ class PodcastDetailViewController: UIViewController, PodcastDetailDisplayLogic {
     
     func setUI() {
         backButton.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
-        thumbnailImageView.layer.cornerRadius = 20
+        thumbnailImageView.layer.cornerRadius = PodcastDetailViewControllerConstants.thumbnailImageViewCornerRadius
         
         favouriteButton.backgroundColor = .red
-        favouriteButton.layer.cornerRadius = 10
+        favouriteButton.layer.cornerRadius = PodcastDetailViewControllerConstants.favouriteButtonCornerRadius
+        setFavourite(isFavourite: podcast?.isFavourite ?? false)
+    }
+    
+    func setFavourite(isFavourite: Bool) {
+        if isFavourite {
+            favouriteButton.setTitle("Favourited", for: .normal)
+        } else {
+            favouriteButton.setTitle("Favourite", for: .normal)
+        }
     }
     
     //MARK: Action methods
     
     @IBAction func backButtonTouchUpInside() {
+        if let podcast = podcast {
+            delegate?.updateFavouriteIn(podcast: podcast)
+        }
         self.dismiss(animated: true)
     }
     
     @IBAction func favouriteButtonTouchUpInside() {
-        
+        if var newPodcast = podcast {
+            newPodcast.isFavourite = !newPodcast.isFavourite
+            setFavourite(isFavourite: newPodcast.isFavourite)
+            
+            podcast = newPodcast
+        }
     }
     
     // MARK: Do something

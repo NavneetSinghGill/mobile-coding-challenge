@@ -12,6 +12,10 @@
 
 import UIKit
 
+protocol PodcastsViewControllerDelegate: AnyObject {
+    func updateFavouriteIn(podcast: Podcast)
+}
+
 protocol PodcastsDisplayLogic: AnyObject
 {
     func displayBestPodcasts(viewModelSuccess: Podcasts.GetBestPodcasts.ViewModelSuccess)
@@ -72,6 +76,7 @@ class PodcastsViewController: UIViewController, PodcastsDisplayLogic {
             case "PodcastsToPodcastDetails":
                 if let podcast = sender as? Podcast {
                     destination.podcast = podcast
+                    destination.delegate = self
 //                    router.perform(selector, with: segue)
                 }
             default:
@@ -127,6 +132,7 @@ class PodcastsViewController: UIViewController, PodcastsDisplayLogic {
         }
     }
     
+    //The success block for get the best prodcasts
     func displayBestPodcasts(viewModelSuccess: Podcasts.GetBestPodcasts.ViewModelSuccess) {
         isGetBestPodcastsAPIinProgress = false
         if viewModel == nil {
@@ -136,6 +142,7 @@ class PodcastsViewController: UIViewController, PodcastsDisplayLogic {
         }
     }
     
+    //The failure block for get the best prodcasts
     func displayErrorMessageForBestPodcasts(viewModelFailure: Podcasts.GetBestPodcasts.ViewModelFailure) {
         //TODO: Display error
         isGetBestPodcastsAPIinProgress = false
@@ -150,6 +157,7 @@ extension PodcastsViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         if let podcast = viewModel?.podcasts[indexPath.row] as? Podcast {
             performSegue(withIdentifier: "PodcastsToPodcastDetails", sender: podcast)
         }
@@ -213,4 +221,20 @@ extension PodcastsViewController: UITableViewDataSource {
             showTheBestPodcasts()
         }
     }
+}
+
+extension PodcastsViewController: PodcastsViewControllerDelegate {
+    
+    //Find an update the respective podcast
+    func updateFavouriteIn(podcast: Podcast) {
+        if let viewModel = viewModel, let index = viewModel.podcasts.firstIndex(where: { element in
+            podcast.id == element.id
+        }) {
+            self.viewModel?.podcasts[index].isFavourite = podcast.isFavourite
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
 }
