@@ -9,28 +9,37 @@ import XCTest
 @testable import mobile_coding_challenge
 
 final class mobile_coding_challengeTests: XCTestCase {
+    
+    var podcastsViewController: PodcastsViewController?
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        podcastsViewController = PodcastsViewController()
+        podcastsViewController?.interactor = PodcastsInteractorInterface()
     }
 
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    func testPodcastsViewControllerInteractorConnection() throws {
+        podcastsViewController?.showTheBestPodcasts()
+        if let interactor = podcastsViewController?.interactor as? PodcastsInteractorInterface {
+            XCTAssertTrue(interactor.didExecuteGetBestPodcasts)
+        } else {
+            XCTAssertTrue(false, "No interactor present in PodcastsViewController")
         }
     }
 
+}
+
+class PodcastsInteractorInterface: PodcastsBusinessLogic, PodcastsDataStore {
+    
+    var didExecuteGetBestPodcasts = false
+    
+    func getBestPodcasts(request: mobile_coding_challenge.Podcasts.GetBestPodcasts.Request) {
+        didExecuteGetBestPodcasts = true
+    }
+    
+    var podcast: mobile_coding_challenge.Podcast?
 }
