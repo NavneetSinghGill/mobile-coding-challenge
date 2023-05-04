@@ -18,8 +18,7 @@ protocol PodcastsDisplayLogic: AnyObject
     func displayErrorMessageForBestPodcasts(viewModelFailure: Podcasts.GetBestPodcasts.ViewModelFailure)
 }
 
-class PodcastsViewController: UIViewController, PodcastsDisplayLogic
-{
+class PodcastsViewController: UIViewController, PodcastsDisplayLogic {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -33,60 +32,62 @@ class PodcastsViewController: UIViewController, PodcastsDisplayLogic
     
     var isGetBestPodcastsAPIinProgress = false
     
-  var interactor: PodcastsBusinessLogic?
-  var router: (NSObjectProtocol & PodcastsRoutingLogic & PodcastsDataPassing)?
-
-  // MARK: Object lifecycle
-  
-  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
-  {
-    super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    setup()
-  }
-  
-  required init?(coder aDecoder: NSCoder)
-  {
-    super.init(coder: aDecoder)
-    setup()
-  }
-  
-  // MARK: Setup
-  
-  private func setup()
-  {
-    let viewController = self
-    let interactor = PodcastsInteractor()
-    let presenter = PodcastsPresenter()
-    let router = PodcastsRouter()
-    viewController.interactor = interactor
-    viewController.router = router
-    interactor.presenter = presenter
-    presenter.viewController = viewController
-    router.viewController = viewController
-    router.dataStore = interactor
-  }
-  
-  // MARK: Routing
-  
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-  {
-    if let scene = segue.identifier {
-      let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-      if let router = router, router.responds(to: selector) {
-        router.perform(selector, with: segue)
-      }
+    var interactor: PodcastsBusinessLogic?
+    var router: (NSObjectProtocol & PodcastsRoutingLogic & PodcastsDataPassing)?
+    
+    // MARK: Object lifecycle
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
+    {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        setup()
     }
-  }
-  
-  // MARK: View lifecycle
-  
-  override func viewDidLoad()
-  {
-    super.viewDidLoad()
-      
-    loadNibs()
-    showTheBestPodcasts()
-  }
+    
+    required init?(coder aDecoder: NSCoder)
+    {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    // MARK: Setup
+    
+    private func setup() {
+        let viewController = self
+        let interactor = PodcastsInteractor()
+        let presenter = PodcastsPresenter()
+        let router = PodcastsRouter()
+        viewController.interactor = interactor
+        viewController.router = router
+        interactor.presenter = presenter
+        presenter.viewController = viewController
+        router.viewController = viewController
+        router.dataStore = interactor
+    }
+    
+    // MARK: Routing
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier, let destination = segue.destination as? PodcastDetailViewController {
+            switch identifier {
+            case "PodcastsToPodcastDetails":
+                if let podcast = sender as? Podcast {
+                    destination.podcast = podcast
+//                    router.perform(selector, with: segue)
+                }
+            default:
+                return
+            }
+        }
+    }
+    
+    // MARK: View lifecycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        loadNibs()
+        showTheBestPodcasts()
+    }
     
     //MARK: Private methods
     func loadNibs() {
@@ -96,44 +97,44 @@ class PodcastsViewController: UIViewController, PodcastsDisplayLogic
         let loaderTableViewCellNib = UINib(nibName: LoaderTableViewCellConstants.identifier, bundle: nil)
         tableView.register(loaderTableViewCellNib, forCellReuseIdentifier: LoaderTableViewCellConstants.identifier)
     }
-  
-  // MARK: Interactions
-  
+    
+    // MARK: Interactions
+    
     //Get the best prodcasts through API
-  func showTheBestPodcasts() {
-      if !isGetBestPodcastsAPIinProgress {
-          
-          let genreID = "93"
-          let region = "us"
-          
-          if viewModel == nil { //This is the first api call when viewmodel is empty
-              let request = Podcasts.GetBestPodcasts.Request(
-                genreID: genreID,
-                page: "1",
-                region: region)
-              
-              isGetBestPodcastsAPIinProgress = true
-              interactor?.getBestPodcasts(request: request)
-          } else if let viewModel = viewModel, viewModel.hasNext { //This executes when we have more pages to be fetched
-              let request = Podcasts.GetBestPodcasts.Request(
-                genreID: genreID,
-                page: "\(viewModel.nextPageNumber)",
-                region: region)
-              
-              isGetBestPodcastsAPIinProgress = true
-              interactor?.getBestPodcasts(request: request)
-          }
-      }
-  }
-  
-  func displayBestPodcasts(viewModelSuccess: Podcasts.GetBestPodcasts.ViewModelSuccess) {
-      isGetBestPodcastsAPIinProgress = false
-      if viewModel == nil {
-          viewModel = viewModelSuccess
-      } else {
-          viewModel?.updateNextPage(viewModel: viewModelSuccess)
-      }
-  }
+    func showTheBestPodcasts() {
+        if !isGetBestPodcastsAPIinProgress {
+            
+            let genreID = "93"
+            let region = "us"
+            
+            if viewModel == nil { //This is the first api call when viewmodel is empty
+                let request = Podcasts.GetBestPodcasts.Request(
+                    genreID: genreID,
+                    page: "1",
+                    region: region)
+                
+                isGetBestPodcastsAPIinProgress = true
+                interactor?.getBestPodcasts(request: request)
+            } else if let viewModel = viewModel, viewModel.hasNext { //This executes when we have more pages to be fetched
+                let request = Podcasts.GetBestPodcasts.Request(
+                    genreID: genreID,
+                    page: "\(viewModel.nextPageNumber)",
+                    region: region)
+                
+                isGetBestPodcastsAPIinProgress = true
+                interactor?.getBestPodcasts(request: request)
+            }
+        }
+    }
+    
+    func displayBestPodcasts(viewModelSuccess: Podcasts.GetBestPodcasts.ViewModelSuccess) {
+        isGetBestPodcastsAPIinProgress = false
+        if viewModel == nil {
+            viewModel = viewModelSuccess
+        } else {
+            viewModel?.updateNextPage(viewModel: viewModelSuccess)
+        }
+    }
     
     func displayErrorMessageForBestPodcasts(viewModelFailure: Podcasts.GetBestPodcasts.ViewModelFailure) {
         //TODO: Display error
@@ -146,6 +147,12 @@ extension PodcastsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         PodcastsTableViewCellConstants.height
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let podcast = viewModel?.podcasts[indexPath.row] as? Podcast {
+            performSegue(withIdentifier: "PodcastsToPodcastDetails", sender: podcast)
+        }
     }
     
 }
@@ -171,7 +178,7 @@ extension PodcastsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
+        
         switch indexPath.section {
         case 0://Podcasts section
             var cell = tableView.dequeueReusableCell(withIdentifier: PodcastsTableViewCellConstants.identifier) as? PodcastsTableViewCell
@@ -200,11 +207,10 @@ extension PodcastsViewController: UITableViewDataSource {
         let height = scrollView.frame.size.height
         let contentYOffset = scrollView.contentOffset.y
         let distanceFromBottom = scrollView.contentSize.height - contentYOffset
-
+        
         if distanceFromBottom < height {
             //Fetch new podcasts when the tableview reaches the end
             showTheBestPodcasts()
         }
     }
-    
 }

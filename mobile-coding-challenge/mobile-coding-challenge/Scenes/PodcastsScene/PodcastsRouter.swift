@@ -24,37 +24,37 @@ protocol PodcastsDataPassing
 
 class PodcastsRouter: NSObject, PodcastsRoutingLogic, PodcastsDataPassing
 {
-  weak var viewController: PodcastsViewController?
-  var dataStore: PodcastsDataStore?
-  
-  // MARK: Routing
-  
-  //func routeToSomewhere(segue: UIStoryboardSegue?)
-  //{
-  //  if let segue = segue {
-  //    let destinationVC = segue.destination as! SomewhereViewController
-  //    var destinationDS = destinationVC.router!.dataStore!
-  //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-  //  } else {
-  //    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-  //    let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
-  //    var destinationDS = destinationVC.router!.dataStore!
-  //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-  //    navigateToSomewhere(source: viewController!, destination: destinationVC)
-  //  }
-  //}
-
-  // MARK: Navigation
-  
-  //func navigateToSomewhere(source: PodcastsViewController, destination: SomewhereViewController)
-  //{
-  //  source.show(destination, sender: nil)
-  //}
-  
-  // MARK: Passing data
-  
-  //func passDataToSomewhere(source: PodcastsDataStore, destination: inout SomewhereDataStore)
-  //{
-  //  destination.name = source.name
-  //}
+    weak var viewController: PodcastsViewController?
+    var dataStore: PodcastsDataStore?
+    
+    // MARK: Routing
+    
+    func routePodcastsVCToPodcastDetailsVC(segue: UIStoryboardSegue?)
+    {
+      if let segue = segue {
+        let destinationVC = segue.destination as! PodcastDetailViewController
+        var destinationDS = destinationVC.router!.dataStore!
+        passDataTo(source: dataStore!, destination: &destinationDS)
+      } else {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let destinationVC = storyboard.instantiateViewController(withIdentifier: "PodcastDetailViewController") as! PodcastDetailViewController
+        var destinationDS = destinationVC.router!.dataStore!
+        passDataTo(source: dataStore!, destination: &destinationDS)
+        navigateTo(source: viewController!, destination: destinationVC)
+      }
+    }
+    
+    // MARK: Navigation
+    
+    func navigateTo(source: PodcastsViewController, destination: PodcastDetailViewController)
+    {
+        source.show(destination, sender: nil)
+    }
+    
+    // MARK: Passing data
+    
+    func passDataTo(source: PodcastsDataStore, destination: inout PodcastDetailDataStore)
+    {
+        destination.podcast = source.podcast
+    }
 }

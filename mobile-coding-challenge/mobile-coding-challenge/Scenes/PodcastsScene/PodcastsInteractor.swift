@@ -14,27 +14,29 @@ import UIKit
 
 protocol PodcastsBusinessLogic
 {
-  func getBestPodcasts(request: Podcasts.GetBestPodcasts.Request)
+    func getBestPodcasts(request: Podcasts.GetBestPodcasts.Request)
 }
 
 protocol PodcastsDataStore
 {
-  //var name: String { get set }
+    var podcast: Podcast? { get set }
 }
 
 class PodcastsInteractor: PodcastsBusinessLogic, PodcastsDataStore
 {
-  var presenter: PodcastsPresentationLogic?
-  var worker: PodcastsWorker?
-  
-  // MARK: APIs
-  
-  func getBestPodcasts(request: Podcasts.GetBestPodcasts.Request)
-  {
-    worker = PodcastsWorker()
-      worker?.getBestPodcasts(request: request, completionBlock: { [weak self] response, customError in
-          self?.presenter?.presentBestPodcasts(response: response, error: customError)
-      })
+    var podcast: Podcast?
     
-  }
+    var presenter: PodcastsPresentationLogic?
+    var worker: PodcastsWorker?
+    
+    // MARK: APIs
+    
+    func getBestPodcasts(request: Podcasts.GetBestPodcasts.Request)
+    {
+        worker = PodcastsWorker()
+        worker?.getBestPodcasts(request: request, completionBlock: { [weak self] response, customError in
+            self?.presenter?.presentBestPodcasts(response: response, error: customError)
+        })
+        
+    }
 }
