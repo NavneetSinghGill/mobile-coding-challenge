@@ -11,7 +11,9 @@ struct PodcastsTableViewCellConstants {
     let identifier = "PodcastsTableViewCell"
     let height: CGFloat = 100
     
-    let cornerRadiusOfThumbnail: CGFloat = 5
+    let cornerRadiusOfThumbnail: CGFloat = 10
+    let favouritedText = "Favourited"
+    let unFavouritedText = " "
 }
 
 class PodcastsTableViewCell: UITableViewCell {
@@ -33,5 +35,26 @@ class PodcastsTableViewCell: UITableViewCell {
 
         //TODO: make text italic
     }
+    
+    func load(podcast: Podcast?) {
+        //Reset the UI before filling
+        titleLabel.text = ""
+        publisherNameLabel.text = ""
+        favouriteLabel.text = ""
+        thumbnailImageView.image = nil
+        
+        //Fill the podcast information
+        if let podcast = podcast {
+            titleLabel.text = podcast.title
+            publisherNameLabel.text = podcast.name
+            favouriteLabel.text = podcast.isFavourite ? PodcastsTableViewCellConstants().favouritedText: PodcastsTableViewCellConstants().unFavouritedText
+            
+            if let url = URL(string: podcast.thumbNailUrl) {
+                thumbnailImageView.load(url: url)
+            }
+        }
+    }
+    
+    
     
 }

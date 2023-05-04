@@ -165,11 +165,7 @@ extension PodcastsViewController: UITableViewDataSource {
                 cell = UITableViewCell(style: .default, reuseIdentifier: PodcastsTableViewCellConstants().identifier) as? PodcastsTableViewCell
             }
             //Fill the podcast cell with information
-            if let podcast = viewModel?.podcasts[indexPath.row] {
-                cell?.titleLabel.text = podcast.title
-                cell?.publisherNameLabel.text = podcast.name
-                cell?.favouriteLabel.text = podcast.favourited()
-            }
+            cell?.load(podcast: viewModel?.podcasts[indexPath.row])
             
             return cell ?? PodcastsTableViewCell()
             

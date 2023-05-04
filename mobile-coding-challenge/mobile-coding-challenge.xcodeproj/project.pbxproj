@@ -28,6 +28,7 @@
 		E9A184482A0307F300B7491D /* ExampleCommandLineApp in Frameworks */ = {isa = PBXBuildFile; productRef = E9A184472A0307F300B7491D /* ExampleCommandLineApp */; };
 		E9A1844C2A034C9400B7491D /* LoaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A1844A2A034C9400B7491D /* LoaderTableViewCell.swift */; };
 		E9A1844D2A034C9400B7491D /* LoaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9A1844B2A034C9400B7491D /* LoaderTableViewCell.xib */; };
+		E9A1844F2A03649100B7491D /* UIImageView+imageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A1844E2A03649100B7491D /* UIImageView+imageDownloader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		E9A184402A02FCBC00B7491D /* Podcast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Podcast.swift; sourceTree = "<group>"; };
 		E9A1844A2A034C9400B7491D /* LoaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderTableViewCell.swift; sourceTree = "<group>"; };
 		E9A1844B2A034C9400B7491D /* LoaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoaderTableViewCell.xib; sourceTree = "<group>"; };
+		E9A1844E2A03649100B7491D /* UIImageView+imageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+imageDownloader.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 				E9A184432A02FCC700B7491D /* Models */,
 				E9A184492A03091600B7491D /* Scenes */,
 				E9A184092A02CBBB00B7491D /* Info.plist */,
+				E9A184502A03649700B7491D /* Utility */,
 			);
 			path = "mobile-coding-challenge";
 			sourceTree = "<group>";
@@ -191,6 +194,14 @@
 				E9A184372A02EF2B00B7491D /* PodcastsScene */,
 			);
 			path = Scenes;
+			sourceTree = "<group>";
+		};
+		E9A184502A03649700B7491D /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				E9A1844E2A03649100B7491D /* UIImageView+imageDownloader.swift */,
+			);
+			path = Utility;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -344,6 +355,7 @@
 				E9A184332A02EF2200B7491D /* PodcastsRouter.swift in Sources */,
 				E9A184352A02EF2200B7491D /* PodcastsViewController.swift in Sources */,
 				E9A184362A02EF2200B7491D /* PodcastsInteractor.swift in Sources */,
+				E9A1844F2A03649100B7491D /* UIImageView+imageDownloader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

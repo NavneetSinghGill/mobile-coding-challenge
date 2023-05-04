@@ -13,8 +13,4 @@ struct Podcast {
     let name: String
     let isFavourite: Bool
     let description: String
-    
-    func favourited() -> String {
-        isFavourite ? "Favourited" : " "
-    }
 }
