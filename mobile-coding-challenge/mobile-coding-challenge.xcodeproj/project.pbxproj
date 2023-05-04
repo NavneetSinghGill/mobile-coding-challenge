@@ -152,12 +152,12 @@
 			isa = PBXGroup;
 			children = (
 				E9A1843D2A02F17A00B7491D /* TableviewCells */,
-				E9A1842B2A02EF2200B7491D /* PodcastsPresenter.swift */,
-				E9A1842C2A02EF2200B7491D /* PodcastsWorker.swift */,
-				E9A1842D2A02EF2200B7491D /* PodcastsRouter.swift */,
-				E9A1842E2A02EF2200B7491D /* PodcastsModels.swift */,
 				E9A1842F2A02EF2200B7491D /* PodcastsViewController.swift */,
 				E9A184302A02EF2200B7491D /* PodcastsInteractor.swift */,
+				E9A1842C2A02EF2200B7491D /* PodcastsWorker.swift */,
+				E9A1842B2A02EF2200B7491D /* PodcastsPresenter.swift */,
+				E9A1842D2A02EF2200B7491D /* PodcastsRouter.swift */,
+				E9A1842E2A02EF2200B7491D /* PodcastsModels.swift */,
 			);
 			path = PodcastsScene;
 			sourceTree = "<group>";

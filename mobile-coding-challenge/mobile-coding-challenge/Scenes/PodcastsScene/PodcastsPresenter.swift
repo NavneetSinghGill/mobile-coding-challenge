@@ -14,16 +14,21 @@ import UIKit
 
 protocol PodcastsPresentationLogic
 {
-  func presentBestPodcasts(response: Podcasts.GetBestPodcasts.Response)
+  func presentBestPodcasts(response: Podcasts.GetBestPodcasts.Response?, error: CustomError?)
 }
 
 class PodcastsPresenter: PodcastsPresentationLogic
 {
-  weak var viewController: PodcastsDisplayLogic?
+    weak var viewController: PodcastsDisplayLogic?
   
-  func presentBestPodcasts(response: Podcasts.GetBestPodcasts.Response)
-  {
-//    let viewModel = Podcasts.GetBestPodcasts.ViewModel()
-//    viewController?.displaySomething(viewModel: viewModel)
-  }
+    func presentBestPodcasts(response: Podcasts.GetBestPodcasts.Response?, error: CustomError?) {
+        if let error = error?.getReadableError() {
+            let viewModelFailure = Podcasts.GetBestPodcasts.ViewModelFailure(error: error)
+            viewController?.displayErrorMessageForBestPodcasts(viewModelFailure: viewModelFailure)
+        } else if let response = response {
+            let viewModelSuccess = Podcasts.GetBestPodcasts.ViewModelSuccess(podcasts: response.podcasts)
+            viewController?.displayBestPodcasts(viewModelSuccess: viewModelSuccess)
+        }
+    }
+    
 }

@@ -8,6 +8,9 @@
 import UIKit
 
 struct PodcastsTableViewCellConstants {
+    let identifier = "PodcastsTableViewCell"
+    let height: CGFloat = 100
+    
     let cornerRadiusOfThumbnail: CGFloat = 5
 }
 
@@ -28,7 +31,7 @@ class PodcastsTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
+        //TODO: make text italic
     }
     
 }

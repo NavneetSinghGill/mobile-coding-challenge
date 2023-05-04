@@ -32,9 +32,9 @@ class PodcastsInteractor: PodcastsBusinessLogic, PodcastsDataStore
   func getBestPodcasts(request: Podcasts.GetBestPodcasts.Request)
   {
     worker = PodcastsWorker()
-    worker?.getBestPodcasts()
+      worker?.getBestPodcasts(request: request, completionBlock: { [weak self] response, customError in
+          self?.presenter?.presentBestPodcasts(response: response, error: customError)
+      })
     
-//    let response = Podcasts.GetBestPodcasts.Response()
-//    presenter?.presentBestPodcasts(response: response)
   }
 }

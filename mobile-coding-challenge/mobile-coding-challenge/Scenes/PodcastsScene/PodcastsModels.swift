@@ -18,10 +18,10 @@ enum Podcasts
   
     enum GetBestPodcasts {
       
-        struct Request: Codable {
-            var genreID: String = "93"
-            var page: String = "2"
-            var region: String = "us"
+        struct Request {
+            var genreID: String
+            var page: String
+            var region: String
         }
       
         struct Response {
@@ -36,8 +36,12 @@ enum Podcasts
           let previousPageNumber: Int
       }
       
-      struct ViewModel {
+      struct ViewModelSuccess {
           let podcasts: [Podcast]
+      }
+        
+      struct ViewModelFailure {
+          let error: String
       }
       
     }

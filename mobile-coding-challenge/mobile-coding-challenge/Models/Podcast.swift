@@ -7,9 +7,14 @@
 
 import Foundation
 
-struct Podcast: Codable {
+struct Podcast {
     let thumbNailUrl: String
     let title: String
     let name: String
     let isFavourite: Bool
+    let description: String
+    
+    func favourited() -> String {
+        isFavourite ? "Favourited" : " "
+    }
 }

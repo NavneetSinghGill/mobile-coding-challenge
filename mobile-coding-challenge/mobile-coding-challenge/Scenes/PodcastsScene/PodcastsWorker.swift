@@ -11,11 +11,80 @@
 //
 
 import UIKit
+import PodcastAPI
+
+enum CustomError {
+    case error(error: Error)
+    case message(message: String)
+    
+    func getReadableError() -> String {
+        switch self {
+            case .error(let error):
+                return error.localizedDescription
+            case .message(let message):
+                return message
+        }
+    }
+}
 
 class PodcastsWorker {
     
-    func getBestPodcasts() {
+    typealias getBestPodcastsClosure = (Podcasts.GetBestPodcasts.Response?, CustomError?) -> Void
+    
+    func getBestPodcasts(request: Podcasts.GetBestPodcasts.Request, completionBlock: @escaping getBestPodcastsClosure) {
         
+        let client = PodcastAPI.Client(
+          apiKey: "",
+          synchronousRequest: true)
+        
+        var parameters: [String: String] = [:]
+        parameters["genre_id"] = request.genreID
+        parameters["page"] = request.page
+        parameters["region"] = request.region
+        parameters["sort"] = "listen_score"
+        parameters["safe_mode"] = "0"
+        
+        client.fetchBestPodcasts(parameters: parameters) { response in
+            
+          if let error = response.error {
+              //Read the error
+            switch(error) {
+              case PodcastApiError.authenticationError:
+                completionBlock(nil, .message(message: "wrong api key"))
+              default:
+                completionBlock(nil, .message(message: "error: \(error)"))
+            }
+          } else {
+              //Read the response and decode to the object
+              if let json = response.toJson()?.dictionary {
+                  
+                  //Create podcast array
+                  let podcasts = json["podcasts"]?.arrayValue.compactMap({ json in
+                      Podcast(
+                        thumbNailUrl: json["thumbnail"].string ?? "",
+                        title: json["title"].string ?? "",
+                        name: json["publisher"].string ?? "",
+                        isFavourite: false,
+                        description: json["description"].string ?? "")
+                  }) ?? [Podcast]()
+                  
+                  //Create final response
+                let response = Podcasts.GetBestPodcasts.Response(
+                    id: json["id"]?.string ?? "",
+                    name: json["name"]?.string ?? "",
+                    total: json["total"]?.string ?? "",
+                    hasNext: json["has_next"]?.bool ?? false,
+                    podcasts: podcasts,
+                    parentID: json["parent_id"]?.int ?? -1,
+                    pageNumber: json["page_number"]?.int ?? -1,
+                    nextPageNumber: json["next_page_number"]?.int ?? -1,
+                    previousPageNumber: json["previous_page_number"]?.int ?? -1)
+                  
+                completionBlock(response, nil)
+            }
+          }
+            
+        }
     }
     
 }

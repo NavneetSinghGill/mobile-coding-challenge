@@ -14,13 +14,22 @@ import UIKit
 
 protocol PodcastsDisplayLogic: AnyObject
 {
-    func displayBestPodcasts(viewModel: Podcasts.GetBestPodcasts.ViewModel)
+    func displayBestPodcasts(viewModelSuccess: Podcasts.GetBestPodcasts.ViewModelSuccess)
+    func displayErrorMessageForBestPodcasts(viewModelFailure: Podcasts.GetBestPodcasts.ViewModelFailure)
 }
 
 class PodcastsViewController: UIViewController, PodcastsDisplayLogic
 {
     
     @IBOutlet weak var tableView: UITableView!
+    
+    var podcasts: [Podcast]? {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
     
   var interactor: PodcastsBusinessLogic?
   var router: (NSObjectProtocol & PodcastsRoutingLogic & PodcastsDataPassing)?
@@ -72,35 +81,66 @@ class PodcastsViewController: UIViewController, PodcastsDisplayLogic
   override func viewDidLoad()
   {
     super.viewDidLoad()
+      
+    loadNibs()
     showTheBestPodcasts()
   }
+    
+    //MARK: Private methods
+    func loadNibs() {
+        let nib = UINib(nibName: PodcastsTableViewCellConstants().identifier, bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: PodcastsTableViewCellConstants().identifier)
+    }
   
   // MARK: Interactions
   
-  func showTheBestPodcasts()
-  {
-    let request = Podcasts.GetBestPodcasts.Request()
+    //Get the best prodcasts through API
+  func showTheBestPodcasts() {
+    let request = Podcasts.GetBestPodcasts.Request(
+        genreID: "93",
+        page: "1",
+        region: "us")
+      
     interactor?.getBestPodcasts(request: request)
   }
   
-  func displayBestPodcasts(viewModel: Podcasts.GetBestPodcasts.ViewModel)
-  {
-    
+  func displayBestPodcasts(viewModelSuccess: Podcasts.GetBestPodcasts.ViewModelSuccess) {
+      podcasts = viewModelSuccess.podcasts
   }
+    
+    func displayErrorMessageForBestPodcasts(viewModelFailure: Podcasts.GetBestPodcasts.ViewModelFailure) {
+        //TODO: Display error
+    }
+    
 }
 
 extension PodcastsViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        PodcastsTableViewCellConstants().height
+    }
     
 }
 
 extension PodcastsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return podcasts?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        var cell = tableView.dequeueReusableCell(withIdentifier: PodcastsTableViewCellConstants().identifier) as? PodcastsTableViewCell
+        if cell == nil {
+            cell = UITableViewCell(style: .default, reuseIdentifier: PodcastsTableViewCellConstants().identifier) as? PodcastsTableViewCell
+        }
+        //Fill the podcast cell with information
+        if let podcast = podcasts?[indexPath.row] {
+            cell?.titleLabel.text = podcast.title
+            cell?.publisherNameLabel.text = podcast.name
+            cell?.favouriteLabel.text = podcast.favourited()
+        }
+        
+        return cell ?? PodcastsTableViewCell()
     }
     
 }
