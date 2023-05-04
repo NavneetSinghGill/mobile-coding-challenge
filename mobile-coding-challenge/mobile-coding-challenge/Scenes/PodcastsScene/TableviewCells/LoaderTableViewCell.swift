@@ -8,8 +8,8 @@
 import UIKit
 
 struct LoaderTableViewCellConstants {
-    let identifier = "LoaderTableViewCell"
-    let height: CGFloat = 100
+    static let identifier = "LoaderTableViewCell"
+    static let height: CGFloat = 100
 }
 
 class LoaderTableViewCell: UITableViewCell {

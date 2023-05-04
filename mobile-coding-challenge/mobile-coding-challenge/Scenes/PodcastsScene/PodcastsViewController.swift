@@ -90,11 +90,11 @@ class PodcastsViewController: UIViewController, PodcastsDisplayLogic
     
     //MARK: Private methods
     func loadNibs() {
-        let podcastsTableViewCellNib = UINib(nibName: PodcastsTableViewCellConstants().identifier, bundle: nil)
-        tableView.register(podcastsTableViewCellNib, forCellReuseIdentifier: PodcastsTableViewCellConstants().identifier)
+        let podcastsTableViewCellNib = UINib(nibName: PodcastsTableViewCellConstants.identifier, bundle: nil)
+        tableView.register(podcastsTableViewCellNib, forCellReuseIdentifier: PodcastsTableViewCellConstants.identifier)
         
-        let loaderTableViewCellNib = UINib(nibName: LoaderTableViewCellConstants().identifier, bundle: nil)
-        tableView.register(loaderTableViewCellNib, forCellReuseIdentifier: LoaderTableViewCellConstants().identifier)
+        let loaderTableViewCellNib = UINib(nibName: LoaderTableViewCellConstants.identifier, bundle: nil)
+        tableView.register(loaderTableViewCellNib, forCellReuseIdentifier: LoaderTableViewCellConstants.identifier)
     }
   
   // MARK: Interactions
@@ -131,7 +131,7 @@ class PodcastsViewController: UIViewController, PodcastsDisplayLogic
 extension PodcastsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        PodcastsTableViewCellConstants().height
+        PodcastsTableViewCellConstants.height
     }
     
 }
@@ -160,9 +160,9 @@ extension PodcastsViewController: UITableViewDataSource {
 
         switch indexPath.section {
         case 0://Podcasts section
-            var cell = tableView.dequeueReusableCell(withIdentifier: PodcastsTableViewCellConstants().identifier) as? PodcastsTableViewCell
+            var cell = tableView.dequeueReusableCell(withIdentifier: PodcastsTableViewCellConstants.identifier) as? PodcastsTableViewCell
             if cell == nil {
-                cell = UITableViewCell(style: .default, reuseIdentifier: PodcastsTableViewCellConstants().identifier) as? PodcastsTableViewCell
+                cell = UITableViewCell(style: .default, reuseIdentifier: PodcastsTableViewCellConstants.identifier) as? PodcastsTableViewCell
             }
             //Fill the podcast cell with information
             cell?.load(podcast: viewModel?.podcasts[indexPath.row])
@@ -170,9 +170,9 @@ extension PodcastsViewController: UITableViewDataSource {
             return cell ?? PodcastsTableViewCell()
             
         case 1://Loader section
-            var cell = tableView.dequeueReusableCell(withIdentifier: LoaderTableViewCellConstants().identifier) as? LoaderTableViewCell
+            var cell = tableView.dequeueReusableCell(withIdentifier: PodcastsTableViewCellConstants.identifier) as? LoaderTableViewCell
             if cell == nil {
-                cell = UITableViewCell(style: .default, reuseIdentifier: LoaderTableViewCellConstants().identifier) as? LoaderTableViewCell
+                cell = UITableViewCell(style: .default, reuseIdentifier: PodcastsTableViewCellConstants.identifier) as? LoaderTableViewCell
             }
             
             return cell ?? LoaderTableViewCell()

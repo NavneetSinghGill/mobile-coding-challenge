@@ -8,12 +8,12 @@
 import UIKit
 
 struct PodcastsTableViewCellConstants {
-    let identifier = "PodcastsTableViewCell"
-    let height: CGFloat = 100
+    static let identifier = "PodcastsTableViewCell"
+    static let height: CGFloat = 100
     
-    let cornerRadiusOfThumbnail: CGFloat = 10
-    let favouritedText = "Favourited"
-    let unFavouritedText = " "
+    static let cornerRadiusOfThumbnail: CGFloat = 10
+    static let favouritedText = "Favourited"
+    static let unFavouritedText = " "
 }
 
 struct PodcastsTableViewCellThemeConstants {
@@ -43,7 +43,7 @@ class PodcastsTableViewCell: UITableViewCell {
     //MARK: Private methods
     
     private func setUIStyle() {
-        thumbnailImageView.layer.cornerRadius = PodcastsTableViewCellConstants().cornerRadiusOfThumbnail
+        thumbnailImageView.layer.cornerRadius = PodcastsTableViewCellConstants.cornerRadiusOfThumbnail
         
         titleLabel.font = UIFont.systemFont(ofSize: PodcastsTableViewCellThemeConstants.headingFontSize)
         titleLabel.textColor = .black
@@ -68,7 +68,7 @@ class PodcastsTableViewCell: UITableViewCell {
         if let podcast = podcast {
             titleLabel.text = podcast.title
             publisherNameLabel.text = podcast.name
-            favouriteLabel.text = podcast.isFavourite ? PodcastsTableViewCellConstants().favouritedText: PodcastsTableViewCellConstants().unFavouritedText
+            favouriteLabel.text = podcast.isFavourite ? PodcastsTableViewCellConstants.favouritedText: PodcastsTableViewCellConstants.unFavouritedText
             
             if let url = URL(string: podcast.thumbNailUrl) {
                 thumbnailImageView.load(url: url)
