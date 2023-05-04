@@ -12,18 +12,18 @@ You will be building a simple two-screen podcasts app. A basic mockup is provide
 
 #### Screen 1
 
-- [ ] Show a list of podcasts using the endpoint provided below.
-- [ ] Each list item should show the podcast thumbnail, title, and publisher name.
-- [ ] Leave some space for the "Favourited" label (refer to the second podcast in the list in the mockup above).
-- [ ] Show the Favourited label only if the podcast has been favourited, otherwise hide the label.
+- [x] Show a list of podcasts using the endpoint provided below.
+- [x] Each list item should show the podcast thumbnail, title, and publisher name.
+- [x] Leave some space for the "Favourited" label (refer to the second podcast in the list in the mockup above).
+- [x] Show the Favourited label only if the podcast has been favourited, otherwise hide the label.
 
 #### Screen 2
 
-- [ ] Tapping on a list item from Screen 1 should bring you to Screen 2.
-- [ ] On Screen 2, show the podcast's title, publisher name, thumbnail, and description.
-- [ ] Add a Favourite button.
-- [ ] The Favourite button should have two states: Favourite and Favourited.
-- [ ] When tapping the Favourite button, the label should change to Favourited, and vice-versa.
+- [x] Tapping on a list item from Screen 1 should bring you to Screen 2.
+- [x] On Screen 2, show the podcast's title, publisher name, thumbnail, and description.
+- [x] Add a Favourite button.
+- [x] The Favourite button should have two states: Favourite and Favourited.
+- [x] When tapping the Favourite button, the label should change to Favourited, and vice-versa.
 
 ## Details
 
