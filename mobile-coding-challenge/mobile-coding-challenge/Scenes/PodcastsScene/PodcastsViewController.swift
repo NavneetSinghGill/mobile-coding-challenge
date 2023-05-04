@@ -77,7 +77,6 @@ class PodcastsViewController: UIViewController, PodcastsDisplayLogic {
                 if let podcast = sender as? Podcast {
                     destination.podcast = podcast
                     destination.delegate = self
-//                    router.perform(selector, with: segue)
                 }
             default:
                 return

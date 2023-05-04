@@ -21,6 +21,11 @@ struct PodcastDetailViewControllerConstants {
     static let favouriteButtonCornerRadius: CGFloat = 10
 }
 
+struct PodcastDetailViewControllerThemeConstants {
+    static let headingFontSize: CGFloat = 23
+    static let subheadingFontSize: CGFloat = 19
+}
+
 class PodcastDetailViewController: UIViewController, PodcastDetailDisplayLogic {
     
     @IBOutlet weak var titleLabel: UILabel!
@@ -96,6 +101,9 @@ class PodcastDetailViewController: UIViewController, PodcastDetailDisplayLogic {
     func setUI() {
         backButton.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
         thumbnailImageView.layer.cornerRadius = PodcastDetailViewControllerConstants.thumbnailImageViewCornerRadius
+        
+        titleLabel.font = UIFont.systemFont(ofSize: PodcastDetailViewControllerThemeConstants.headingFontSize)
+        publisherNameLabel.font = UIFont.italicSystemFont(ofSize: PodcastDetailViewControllerThemeConstants.subheadingFontSize)
         
         favouriteButton.backgroundColor = .red
         favouriteButton.layer.cornerRadius = PodcastDetailViewControllerConstants.favouriteButtonCornerRadius
