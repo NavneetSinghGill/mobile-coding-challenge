@@ -61,11 +61,12 @@ class PodcastsWorker {
                   //Create podcast array
                   let podcasts = json["podcasts"]?.arrayValue.compactMap({ json in
                       Podcast(
-                        thumbNailUrl: json["thumbnail"].string ?? "",
-                        title: json["title"].string ?? "",
-                        name: json["publisher"].string ?? "",
+                        id: json["id"].stringValue,
+                        thumbNailUrl: json["thumbnail"].stringValue,
+                        title: json["title"].stringValue,
+                        name: json["publisher"].stringValue,
                         isFavourite: false,
-                        description: json["description"].string ?? "")
+                        description: json["description"].stringValue)
                   }) ?? [Podcast]()
                   
                   //Create final response
