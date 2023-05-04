@@ -94,6 +94,12 @@ class PodcastsViewController: UIViewController, PodcastsDisplayLogic {
         showTheBestPodcasts()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        tableView.reloadData()
+    }
+    
     //MARK: Private methods
     func loadNibs() {
         let podcastsTableViewCellNib = UINib(nibName: PodcastsTableViewCellConstants.identifier, bundle: nil)
