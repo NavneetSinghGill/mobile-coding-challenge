@@ -102,13 +102,27 @@ class PodcastsViewController: UIViewController, PodcastsDisplayLogic
     //Get the best prodcasts through API
   func showTheBestPodcasts() {
       if !isGetBestPodcastsAPIinProgress {
-          let request = Podcasts.GetBestPodcasts.Request(
-            genreID: "93",
-            page: "\(viewModel?.nextPageNumber ?? 1)",
-            region: "us")
           
-          isGetBestPodcastsAPIinProgress = true
-          interactor?.getBestPodcasts(request: request)
+          let genreID = "93"
+          let region = "us"
+          
+          if viewModel == nil { //This is the first api call when viewmodel is empty
+              let request = Podcasts.GetBestPodcasts.Request(
+                genreID: genreID,
+                page: "1",
+                region: region)
+              
+              isGetBestPodcastsAPIinProgress = true
+              interactor?.getBestPodcasts(request: request)
+          } else if let viewModel = viewModel, viewModel.hasNext { //This executes when we have more pages to be fetched
+              let request = Podcasts.GetBestPodcasts.Request(
+                genreID: genreID,
+                page: "\(viewModel.nextPageNumber)",
+                region: region)
+              
+              isGetBestPodcastsAPIinProgress = true
+              interactor?.getBestPodcasts(request: request)
+          }
       }
   }
   
