@@ -26,6 +26,8 @@
 		E9A184412A02FCBC00B7491D /* Podcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A184402A02FCBC00B7491D /* Podcast.swift */; };
 		E9A184462A0307F300B7491D /* PodcastAPI in Frameworks */ = {isa = PBXBuildFile; productRef = E9A184452A0307F300B7491D /* PodcastAPI */; };
 		E9A184482A0307F300B7491D /* ExampleCommandLineApp in Frameworks */ = {isa = PBXBuildFile; productRef = E9A184472A0307F300B7491D /* ExampleCommandLineApp */; };
+		E9A1844C2A034C9400B7491D /* LoaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A1844A2A034C9400B7491D /* LoaderTableViewCell.swift */; };
+		E9A1844D2A034C9400B7491D /* LoaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9A1844B2A034C9400B7491D /* LoaderTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +69,8 @@
 		E9A184382A02F16800B7491D /* PodcastsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastsTableViewCell.swift; sourceTree = "<group>"; };
 		E9A184392A02F16800B7491D /* PodcastsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PodcastsTableViewCell.xib; sourceTree = "<group>"; };
 		E9A184402A02FCBC00B7491D /* Podcast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Podcast.swift; sourceTree = "<group>"; };
+		E9A1844A2A034C9400B7491D /* LoaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderTableViewCell.swift; sourceTree = "<group>"; };
+		E9A1844B2A034C9400B7491D /* LoaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoaderTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +171,8 @@
 			children = (
 				E9A184382A02F16800B7491D /* PodcastsTableViewCell.swift */,
 				E9A184392A02F16800B7491D /* PodcastsTableViewCell.xib */,
+				E9A1844A2A034C9400B7491D /* LoaderTableViewCell.swift */,
+				E9A1844B2A034C9400B7491D /* LoaderTableViewCell.xib */,
 			);
 			path = TableviewCells;
 			sourceTree = "<group>";
@@ -302,6 +308,7 @@
 				E9A184052A02CBBB00B7491D /* Assets.xcassets in Resources */,
 				E9A1843B2A02F16800B7491D /* PodcastsTableViewCell.xib in Resources */,
 				E9A184032A02CBBA00B7491D /* Main.storyboard in Resources */,
+				E9A1844D2A034C9400B7491D /* LoaderTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,6 +335,7 @@
 			files = (
 				E9A184342A02EF2200B7491D /* PodcastsModels.swift in Sources */,
 				E9A183FC2A02CBBA00B7491D /* AppDelegate.swift in Sources */,
+				E9A1844C2A034C9400B7491D /* LoaderTableViewCell.swift in Sources */,
 				E9A183FE2A02CBBA00B7491D /* SceneDelegate.swift in Sources */,
 				E9A1843A2A02F16800B7491D /* PodcastsTableViewCell.swift in Sources */,
 				E9A184312A02EF2200B7491D /* PodcastsPresenter.swift in Sources */,

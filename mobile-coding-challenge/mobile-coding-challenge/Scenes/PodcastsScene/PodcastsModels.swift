@@ -37,7 +37,15 @@ enum Podcasts
       }
       
       struct ViewModelSuccess {
-          let podcasts: [Podcast]
+          var hasNext: Bool
+          var podcasts: [Podcast]
+          var nextPageNumber: Int
+          
+          mutating func updateNextPage(viewModel: ViewModelSuccess) {
+              hasNext = viewModel.hasNext
+              podcasts.append(contentsOf: viewModel.podcasts)
+              nextPageNumber = viewModel.nextPageNumber
+          }
       }
         
       struct ViewModelFailure {

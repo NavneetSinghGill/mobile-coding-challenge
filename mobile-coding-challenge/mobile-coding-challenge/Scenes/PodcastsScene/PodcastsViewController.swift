@@ -23,13 +23,15 @@ class PodcastsViewController: UIViewController, PodcastsDisplayLogic
     
     @IBOutlet weak var tableView: UITableView!
     
-    var podcasts: [Podcast]? {
+    var viewModel: Podcasts.GetBestPodcasts.ViewModelSuccess? {
         didSet {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
         }
     }
+    
+    var isGetBestPodcastsAPIinProgress = false
     
   var interactor: PodcastsBusinessLogic?
   var router: (NSObjectProtocol & PodcastsRoutingLogic & PodcastsDataPassing)?
@@ -88,28 +90,40 @@ class PodcastsViewController: UIViewController, PodcastsDisplayLogic
     
     //MARK: Private methods
     func loadNibs() {
-        let nib = UINib(nibName: PodcastsTableViewCellConstants().identifier, bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: PodcastsTableViewCellConstants().identifier)
+        let podcastsTableViewCellNib = UINib(nibName: PodcastsTableViewCellConstants().identifier, bundle: nil)
+        tableView.register(podcastsTableViewCellNib, forCellReuseIdentifier: PodcastsTableViewCellConstants().identifier)
+        
+        let loaderTableViewCellNib = UINib(nibName: LoaderTableViewCellConstants().identifier, bundle: nil)
+        tableView.register(loaderTableViewCellNib, forCellReuseIdentifier: LoaderTableViewCellConstants().identifier)
     }
   
   // MARK: Interactions
   
     //Get the best prodcasts through API
   func showTheBestPodcasts() {
-    let request = Podcasts.GetBestPodcasts.Request(
-        genreID: "93",
-        page: "1",
-        region: "us")
-      
-    interactor?.getBestPodcasts(request: request)
+      if !isGetBestPodcastsAPIinProgress {
+          let request = Podcasts.GetBestPodcasts.Request(
+            genreID: "93",
+            page: "\(viewModel?.nextPageNumber ?? 1)",
+            region: "us")
+          
+          isGetBestPodcastsAPIinProgress = true
+          interactor?.getBestPodcasts(request: request)
+      }
   }
   
   func displayBestPodcasts(viewModelSuccess: Podcasts.GetBestPodcasts.ViewModelSuccess) {
-      podcasts = viewModelSuccess.podcasts
+      isGetBestPodcastsAPIinProgress = false
+      if viewModel == nil {
+          viewModel = viewModelSuccess
+      } else {
+          viewModel?.updateNextPage(viewModel: viewModelSuccess)
+      }
   }
     
     func displayErrorMessageForBestPodcasts(viewModelFailure: Podcasts.GetBestPodcasts.ViewModelFailure) {
         //TODO: Display error
+        isGetBestPodcastsAPIinProgress = false
     }
     
 }
@@ -124,23 +138,63 @@ extension PodcastsViewController: UITableViewDelegate {
 
 extension PodcastsViewController: UITableViewDataSource {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        if let viewModel = viewModel, viewModel.hasNext {
+            return 2
+        }
+        return 1
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return podcasts?.count ?? 0
+        switch section {
+        case 0://Podcasts section
+            return viewModel?.podcasts.count ?? 0
+        case 1://Loader section
+            return 1
+        default:
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: PodcastsTableViewCellConstants().identifier) as? PodcastsTableViewCell
-        if cell == nil {
-            cell = UITableViewCell(style: .default, reuseIdentifier: PodcastsTableViewCellConstants().identifier) as? PodcastsTableViewCell
-        }
-        //Fill the podcast cell with information
-        if let podcast = podcasts?[indexPath.row] {
-            cell?.titleLabel.text = podcast.title
-            cell?.publisherNameLabel.text = podcast.name
-            cell?.favouriteLabel.text = podcast.favourited()
+
+        switch indexPath.section {
+        case 0://Podcasts section
+            var cell = tableView.dequeueReusableCell(withIdentifier: PodcastsTableViewCellConstants().identifier) as? PodcastsTableViewCell
+            if cell == nil {
+                cell = UITableViewCell(style: .default, reuseIdentifier: PodcastsTableViewCellConstants().identifier) as? PodcastsTableViewCell
+            }
+            //Fill the podcast cell with information
+            if let podcast = viewModel?.podcasts[indexPath.row] {
+                cell?.titleLabel.text = podcast.title
+                cell?.publisherNameLabel.text = podcast.name
+                cell?.favouriteLabel.text = podcast.favourited()
+            }
+            
+            return cell ?? PodcastsTableViewCell()
+            
+        case 1://Loader section
+            var cell = tableView.dequeueReusableCell(withIdentifier: LoaderTableViewCellConstants().identifier) as? LoaderTableViewCell
+            if cell == nil {
+                cell = UITableViewCell(style: .default, reuseIdentifier: LoaderTableViewCellConstants().identifier) as? LoaderTableViewCell
+            }
+            
+            return cell ?? LoaderTableViewCell()
+        default:
+            return UITableViewCell()
         }
         
-        return cell ?? PodcastsTableViewCell()
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let height = scrollView.frame.size.height
+        let contentYOffset = scrollView.contentOffset.y
+        let distanceFromBottom = scrollView.contentSize.height - contentYOffset
+
+        if distanceFromBottom < height {
+            //Fetch new podcasts when the tableview reaches the end
+            showTheBestPodcasts()
+        }
     }
     
 }

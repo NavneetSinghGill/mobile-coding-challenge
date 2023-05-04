@@ -23,10 +23,16 @@ class PodcastsPresenter: PodcastsPresentationLogic
   
     func presentBestPodcasts(response: Podcasts.GetBestPodcasts.Response?, error: CustomError?) {
         if let error = error?.getReadableError() {
-            let viewModelFailure = Podcasts.GetBestPodcasts.ViewModelFailure(error: error)
+            let viewModelFailure = Podcasts.GetBestPodcasts.ViewModelFailure(
+                error: error
+            )
             viewController?.displayErrorMessageForBestPodcasts(viewModelFailure: viewModelFailure)
         } else if let response = response {
-            let viewModelSuccess = Podcasts.GetBestPodcasts.ViewModelSuccess(podcasts: response.podcasts)
+            let viewModelSuccess = Podcasts.GetBestPodcasts.ViewModelSuccess(
+                hasNext: response.hasNext,
+                podcasts: response.podcasts,
+                nextPageNumber: response.nextPageNumber
+            )
             viewController?.displayBestPodcasts(viewModelSuccess: viewModelSuccess)
         }
     }
