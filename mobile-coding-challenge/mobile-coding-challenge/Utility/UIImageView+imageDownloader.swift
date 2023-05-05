@@ -9,22 +9,39 @@ import Foundation
 import UIKit
 
 let imageCache = NSCache<AnyObject, AnyObject>()
-extension UIImageView {
+
+class ImageDownloaderImageView: UIImageView {
+    var urlToLoad: URL?
+}
+
+
+extension ImageDownloaderImageView {
     
     //Load image through url
-    func load(url: URL) {
+    func load(url: URL, completionBlock: (URL) -> () = {_ in }) {
+        //Store the url for later comparision
+        urlToLoad = url
+        
         DispatchQueue.global().async { [weak self] in
             //Load image from cache
             if let imageFromCache = imageCache.object(forKey: url as AnyObject) as? UIImage {
                 DispatchQueue.main.async {
-                    self?.image = imageFromCache
+                    if let urlToLoad = self?.urlToLoad, urlToLoad == url {
+                        self?.image = imageFromCache
+                        print("1 \(urlToLoad) \n \(url) \n")
+                    }
                 }
             } else {
                 if let data = try? Data(contentsOf: url) {
                     if let imageToCache = UIImage(data: data) {
-                        DispatchQueue.main.async {
+                        DispatchQueue.main.async { [weak self] in
                             imageCache.setObject(imageToCache, forKey: url as AnyObject)
-                            self?.image = imageToCache
+                            
+                            if let urlToLoad = self?.urlToLoad, urlToLoad == url { //This condition lets update image only if imageview is correct
+                                self?.image = imageToCache
+                                print("2 \(urlToLoad) \n \(url) \n")
+                            }
+                            
                         }
                     }
                 }

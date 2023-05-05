@@ -23,7 +23,7 @@ struct PodcastsTableViewCellThemeConstants {
 
 class PodcastsTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var thumbnailImageView: UIImageView!
+    @IBOutlet weak var thumbnailImageView: ImageDownloaderImageView!
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var publisherNameLabel: UILabel!
@@ -71,7 +71,7 @@ class PodcastsTableViewCell: UITableViewCell {
             favouriteLabel.text = podcast.isFavourite ? PodcastsTableViewCellConstants.favouritedText: PodcastsTableViewCellConstants.unFavouritedText
             
             if let url = URL(string: podcast.thumbNailUrl) {
-                thumbnailImageView.load(url: url)
+                self.thumbnailImageView.load(url: url)
             }
         }
     }

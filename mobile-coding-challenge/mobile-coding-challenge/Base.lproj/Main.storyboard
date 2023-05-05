@@ -73,7 +73,7 @@
                                 <color key="textColor" systemColor="systemGrayColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2uX-js-Vfi">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2uX-js-Vfi" customClass="ImageDownloaderImageView" customModule="mobile_coding_challenge" customModuleProvider="target">
                                 <rect key="frame" x="98.333333333333329" y="185.33333333333337" width="196.33333333333337" height="196.66666666666663"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="2uX-js-Vfi" secondAttribute="height" id="eae-9G-mdN"/>

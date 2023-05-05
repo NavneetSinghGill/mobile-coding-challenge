@@ -32,7 +32,7 @@ class PodcastDetailViewController: UIViewController, PodcastDetailDisplayLogic {
     @IBOutlet weak var publisherNameLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     
-    @IBOutlet weak var thumbnailImageView: UIImageView!
+    @IBOutlet weak var thumbnailImageView: ImageDownloaderImageView!
     
     @IBOutlet weak var favouriteButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
