@@ -11,11 +11,14 @@ import XCTest
 final class mobile_coding_challengeTests: XCTestCase {
     
     var podcastsViewController: PodcastsViewController?
+    var worker: PodcastsWorker?
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         podcastsViewController = PodcastsViewController()
         podcastsViewController?.interactor = PodcastsInteractorInterface()
+        
+        worker = PodcastsWorker()
     }
 
     override func tearDownWithError() throws {
@@ -29,6 +32,19 @@ final class mobile_coding_challengeTests: XCTestCase {
         } else {
             XCTAssertTrue(false, "No interactor present in PodcastsViewController")
         }
+    }
+    
+    func testGetBestPodcastsAPI() async {
+        let expectation = XCTestExpectation(description: "GetBestPodcastsAPI")
+        
+        let request = Podcasts.GetBestPodcasts.Request(genreID: "93", page: "1", region: "us")
+        worker?.getBestPodcasts(request: request, completionBlock: { response, customError in
+            if let name = response?.name, !name.isEmpty {
+                expectation.fulfill()
+            }
+        })
+        
+        await fulfillment(of: [expectation])
     }
 
 }
