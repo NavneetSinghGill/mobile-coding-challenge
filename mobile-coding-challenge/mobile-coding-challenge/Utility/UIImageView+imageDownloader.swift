@@ -28,20 +28,20 @@ extension ImageDownloaderImageView {
                 DispatchQueue.main.async {
                     if let urlToLoad = self?.urlToLoad, urlToLoad == url {
                         self?.image = imageFromCache
-                        print("1 \(urlToLoad) \n \(url) \n")
                     }
                 }
             } else {
-                if let data = try? Data(contentsOf: url) {
-                    if let imageToCache = UIImage(data: data) {
-                        DispatchQueue.main.async { [weak self] in
-                            imageCache.setObject(imageToCache, forKey: url as AnyObject)
-                            
-                            if let urlToLoad = self?.urlToLoad, urlToLoad == url { //This condition lets update image only if imageview is correct
-                                self?.image = imageToCache
-                                print("2 \(urlToLoad) \n \(url) \n")
+                DispatchQueue.global(qos: .background).async {
+                    if let data = try? Data(contentsOf: url) {
+                        if let imageToCache = UIImage(data: data) {
+                            DispatchQueue.main.async { [weak self] in
+                                imageCache.setObject(imageToCache, forKey: url as AnyObject)
+                                
+                                if let urlToLoad = self?.urlToLoad, urlToLoad == url { //This condition lets update image only if imageview is correct
+                                    self?.image = imageToCache
+                                }
+                                
                             }
-                            
                         }
                     }
                 }

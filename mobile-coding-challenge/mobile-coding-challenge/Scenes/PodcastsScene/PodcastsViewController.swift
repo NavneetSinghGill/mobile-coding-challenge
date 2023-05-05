@@ -163,7 +163,7 @@ extension PodcastsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if let podcast = viewModel?.podcasts[indexPath.row] as? Podcast {
+        if indexPath.section == 0, let podcast = viewModel?.podcasts[indexPath.row] as? Podcast {
             performSegue(withIdentifier: "PodcastsToPodcastDetails", sender: podcast)
         }
     }
@@ -204,9 +204,9 @@ extension PodcastsViewController: UITableViewDataSource {
             return cell ?? PodcastsTableViewCell()
             
         case 1://Loader section
-            var cell = tableView.dequeueReusableCell(withIdentifier: PodcastsTableViewCellConstants.identifier) as? LoaderTableViewCell
+            var cell = tableView.dequeueReusableCell(withIdentifier: LoaderTableViewCellConstants.identifier) as? LoaderTableViewCell
             if cell == nil {
-                cell = UITableViewCell(style: .default, reuseIdentifier: PodcastsTableViewCellConstants.identifier) as? LoaderTableViewCell
+                cell = UITableViewCell(style: .default, reuseIdentifier: LoaderTableViewCellConstants.identifier) as? LoaderTableViewCell
             }
             
             return cell ?? LoaderTableViewCell()
